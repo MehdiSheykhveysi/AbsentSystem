@@ -1,0 +1,93 @@
+﻿<html lang="zxx">
+<head>
+    <title>Business: Business Multipurpose HTML template</title>
+    <partial name="MetaTagPartialView" />
+    <!-- All CSS Files -->
+    <partial name="CssStylePartialView" />
+</head>
+<body>
+    <partial name="PreloadTopAndPageHeaderPartialView" />
+    <!-- ==== Header Start  ==== -->
+    <header id="pageHeader" class="header navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar icon-bar-last"></span>
+                </button>
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()">ثبت نام</a></li>
+                    <li><a href="#contact">ورود</a></li>
+                </ul>
+            </div>
+            <nav id="myNavbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#contact">ارتباط با ما</a></li>
+                    <li><a href="#gallery">تصاویر</a></li>
+                    <li><a href="#blog">شبکه اجتماعی</a></li>
+                    <li><a href="#team">تیم</a></li>
+                    <li><a href="#portfolio">فعالیت ها</a></li>
+                    <li><a href="#service">خدمات</a></li>
+                    <li><a href="#about">درباره ی من</a></li>
+                    <li><a href="#home">خانه</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- ==== Header End ==== -->
+    <!--== Page Title Section Start ==-->
+    <section class="page-title page-bg bg-opacity title-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Blog Details</h2>
+
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb">
+            <div class="container">
+                <div class="row">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li>Blog Details</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--== Page Title Section End ==-->
+    <!--== Blog Section Start ==-->
+
+    <section class="blog-details-post section-padding-tb">
+        <div class="container">
+            <div class="row">
+                @RenderBody()
+            </div>
+        </div>
+    </section>
+    <!--== Blog Section End ==-->
+    <!-- ==== Footer Section Start ==== -->
+    <partial name="FooterPartialView" />
+    <!-- ==== Footer Section End ==== -->
+    <!-- All JS Here -->
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.parallax-1.1.3.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/isotope.js"></script>
+    <script src="~/js/particles.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/responsiveslides.js"></script>
+    <script src="~/js/jquery.lineProgressbar.js"></script>
+    <script src="~/js/jquery.waypoints.min.js"></script>
+    <script src="~/js/typed.js"></script>
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <script src="~/js/masonry.pkgd.js"></script>
+    <script src="~/js/tweetie.js"></script>
+    <script src="~/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <title>Business: Business Multipurpose HTML template</title>
+    <partial name="MetaTagPartialView" />
+    <!-- All CSS Files -->
+    <partial name="CssStylePartialView" />
+</head>
+<body class="dark-bg">
+    <partial name="PreloadTopAndPageHeaderPartialView" />
+    <!-- ==== Header Start  ==== -->
+    <header id="pageHeader" class="header navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar icon-bar-last"></span>
+                </button>
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()">ثبت نام</a></li>
+                    <li><a href="#contact">ورود</a></li>
+                </ul>
+            </div>
+            <nav id="myNavbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#contact">ارتباط با ما</a></li>
+                    <li><a href="#gallery">تصاویر</a></li>
+                    <li><a href="#blog">شبکه اجتماعی</a></li>
+                    <li><a href="#team">تیم</a></li>
+                    <li><a href="#portfolio">فعالیت ها</a></li>
+                    <li><a href="#service">خدمات</a></li>
+                    <li><a href="#about">درباره ی من</a></li>
+                    <li><a href="#home">خانه</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- ==== Header End ==== -->
+    <div id="home" class="main-header bg-opacity">
+        <!-- main header -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-header-text">
+                        <h1>خوش اومدی</h1>
+                        <h3>دنبال چی میگردی؟ <span class="element"></span></h3>
+                        <a href="#" class="active">آشنایی با من</a>
+                        <a href="#">ارتباط با من</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /main header -->
+    </div>
+    <!-- ==== Main Banner service Strat ==== -->
+    <section class="header-service">
+        <div class="container">
+            <div class="row">
+                <!-- Service Item -->
+                <div class="col-md-4">
+                    <div class="serviceBox">
+                        <div class="service-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>تجربیات من</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis purus vitae dui efficitur facilisis non vitae metus. Phasellus.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service Item -->
+                <div class="col-md-4">
+                    <div class="serviceBox">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>BUSINESS ANALYSIS</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis purus vitae dui efficitur facilisis non vitae metus. Phasellus.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Service Item -->
+                <div class="col-md-4">
+                    <div class="serviceBox">
+                        <div class="service-icon">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>MARKETING EXPERT</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis purus vitae dui efficitur facilisis non vitae metus. Phasellus.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==== Main Banner service End ==== -->
+    <section>
+        <div class="container">
+            <div class="row">
+                @RenderBody()
+            </div>
+        </div>
+    </section>
+    <!-- ==== Footer Section Start ==== -->
+    <partial name="FooterPartialView" />
+    <!-- ==== Footer Section End ==== -->
+    <!-- All JS Here -->
+    <partial name="ScriptsPartialView" />
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZtTj2tvwsorp_DNPh3ZN_pMlSniet5h4&callback=initMap">
+    </script>
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <script src="~/js/masonry.pkgd.js"></script>
+    <script src="~/js/tweetie.js"></script>
+    <script src="~/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
