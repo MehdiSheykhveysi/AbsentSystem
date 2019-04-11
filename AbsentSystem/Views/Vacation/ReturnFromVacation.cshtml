@@ -1,0 +1,49 @@
+﻿@model AbsentSystem.Models.VacationViewModel.VacationIndexVm
+
+@{
+    ViewData["Title"] = "ثبت ساعت بازگشت";
+    Layout = "~/Areas/Identity/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>ثبت ساعت بازگشت</h2>
+
+<form asp-action="ReturnFromVacation">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="Id" hidden />
+    <div class="form-group">
+        <label asp-for="Title" class="control-label"></label>
+        <input asp-for="Title" class="form-control" readonly />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EntranceDate" class="control-label"></label>
+        <input asp-for="EntranceDate" hidden />
+        <input asp-for="ShowEntranceDate" class="form-control" readonly />
+        <span asp-validation-for="EntranceDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EntranceTime" class="control-label"></label>
+        <input asp-for="EntranceTime"  class="form-control" readonly />
+        <span asp-validation-for="EntranceTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TimeOff" class="control-label"></label>
+        <input asp-for="TimeOff" hidden />
+        <input asp-for="ShowTimeOff" class="form-control" readonly />
+        <span asp-validation-for="TimeOff" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DepartureDate" class="control-label"></label>
+        <input asp-for="DepartureDate" hidden />
+        <input asp-for="ShowDepartureDate" class="form-control" readonly />
+        <span asp-validation-for="DepartureDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DepartureTime" class="control-label"></label>
+        <input asp-for="DepartureTime" class="form-control" readonly />
+        <span asp-validation-for="DepartureTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="ثبت" class="btn btn-success" />
+    </div>
+</form>

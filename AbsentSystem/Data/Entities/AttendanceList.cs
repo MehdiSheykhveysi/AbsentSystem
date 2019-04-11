@@ -11,7 +11,7 @@ namespace AbsentSystem.Data.Entities
         public DateTime? DepartureDate { get; set; }
 
         //Navigation Property
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
         public ICollection<TypeVacation> Vacations { get; set; }
     }

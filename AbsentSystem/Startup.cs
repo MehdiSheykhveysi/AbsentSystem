@@ -8,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AbsentSystem.Data.Entities;
 using Microsoft.AspNetCore.Identity;
+using AutoMapper;
+using AbsentSystem.Data.Repositories.Contract;
+using AbsentSystem.Data.Repositories.Implementation;
 
 namespace AbsentSystem
 {
@@ -33,7 +36,7 @@ namespace AbsentSystem
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<User, IdentityRole>(Options =>
+            services.AddIdentity<User,IdentityRole>(Options =>
             {
                 Options.Password.RequireDigit = false;
                 Options.Password.RequiredLength = 4;
@@ -41,9 +44,11 @@ namespace AbsentSystem
                 Options.Password.RequireLowercase = false;
                 Options.Password.RequireNonAlphanumeric = false;
                 Options.Password.RequireUppercase = false;
-            }).AddEntityFrameworkStores<ApplicationDbContext>();
-
+            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddScoped<IAttendanceListRepository, AttendanceListRepository>();
+            services.AddScoped<IVacationRepository, VacationRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

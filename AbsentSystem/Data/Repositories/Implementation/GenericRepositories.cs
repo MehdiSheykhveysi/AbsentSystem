@@ -1,14 +1,14 @@
-﻿using AbsentSystem.Data;
-using AbsentSystem.Data.Entities;
+﻿using AbsentSystem.Data.Entities;
+using AbsentSystem.Data.Repositories.Contract;
 using AbsentSystem.Infrastructure.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Site.Core.DataBase.Repositories
+namespace AbsentSystem.Data.Repositories.Implementation
 {
-    public class GenericRepositories<TEntity> : IGenericRepositories<TEntity> where TEntity : class, IEntiity,new()
+    public class GenericRepositories<TEntity> : IGenericRepositories<TEntity> where TEntity : class, IEntiity
     {
         protected readonly ApplicationDbContext context;
         public DbSet<TEntity> Entities { get; set; }
@@ -20,15 +20,12 @@ namespace Site.Core.DataBase.Repositories
             context = Context;
             Entities = context.Set<TEntity>();
         }
-        
-        public virtual Task<TEntity> GetByIdAsync(object ID, CancellationToken CancellationToken)
-        {
-            return Entities.FindAsync(ID, CancellationToken);
-        }
+
+        public virtual Task<TEntity> GetByIdAsync(object ID, CancellationToken CancellationToken) => Entities.FindAsync(ID, CancellationToken);
 
         public virtual async Task AddAsync(TEntity entity,CancellationToken cancellationToken)
         {
-            if (Assert.NotNull<TEntity>(entity))
+            if (Assert.NotNull(entity))
             {
                 await Entities.AddAsync(entity,cancellationToken);
                 await context.SaveChangesAsync(cancellationToken);
@@ -36,7 +33,7 @@ namespace Site.Core.DataBase.Repositories
         }
         public virtual async Task UpdateAsync(TEntity entity,CancellationToken cancellationToken)
         {
-            if (Assert.NotNull<TEntity>(entity))
+            if (Assert.NotNull(entity))
             {
                 Entities.Update(entity);
                 await context.SaveChangesAsync(cancellationToken);
@@ -44,7 +41,7 @@ namespace Site.Core.DataBase.Repositories
         }
         public virtual async Task DeleteAsync(TEntity entity,CancellationToken cancellationToken)
         {
-            if (Assert.NotNull<TEntity>(entity))
+            if (Assert.NotNull(entity))
             {
                 Entities.Remove(entity);
                 await context.SaveChangesAsync(cancellationToken);

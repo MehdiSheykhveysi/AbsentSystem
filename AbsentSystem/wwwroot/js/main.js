@@ -1,4 +1,4 @@
-
+﻿
 $(document).ready(function (){
 
     'use strict';
@@ -189,7 +189,7 @@ $(document).ready(function (){
     var element = $(".element");
     $(function() {
       element.typed({
-        strings: ["Web Development", "Brand Building", "Business Development", "Marketing Development" ],
+        strings: ["سامانه حضور غیاب", "کارمندان", "دانشجویان", "استفاده آسان" ],
         typeSpeed: 100,
         loop: true,
       });

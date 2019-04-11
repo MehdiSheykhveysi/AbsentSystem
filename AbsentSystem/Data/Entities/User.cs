@@ -9,8 +9,11 @@ namespace AbsentSystem.Data.Entities
         {
 
         }
-        public string PersonnelId { get; set; }
-
+        public string DisplayName { get; set; }
+        public string PersonelId { get; set; }
+        public string ShowPass { get; set; }
+        public string Address { get; set; }
+        public string NationalCode { get; set; }
 
         //Navigation Property
         public ICollection<AttendanceList> AttendanceLists { get; set; }

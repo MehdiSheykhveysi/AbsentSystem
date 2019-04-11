@@ -27,18 +27,11 @@ namespace AbsentSystem.Areas.Identity.Pages.Account
         {
         }
 
-        public async Task<IActionResult> OnPost(string returnUrl = null)
+        public async Task<IActionResult> OnPost()
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            if (returnUrl != null)
-            {
-                return LocalRedirect(returnUrl);
-            }
-            else
-            {
-                return Page();
-            }
+            return LocalRedirect("/");
         }
     }
 }

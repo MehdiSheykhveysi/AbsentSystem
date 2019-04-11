@@ -1,0 +1,38 @@
+﻿@model AbsentSystem.Models.UserViewModel.UserVacationVm
+
+@{
+    ViewData["Title"] = "صفحه مرخصی";
+    Layout = "~/Areas/Identity/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>اعلام مرخصی</h2>
+
+<form asp-action="Vacation">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Id" hidden/>
+    <div class="form-group">
+        <label asp-for="Title" class="control-label"></label>
+        <input asp-for="Title" class="form-control" required />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TimeOff" class="control-label"></label>
+        <input asp-for="TimeOff" class="form-control" type="time" placeholder="12:20" required />
+        <span asp-validation-for="TimeOff" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DepartureDate" class="control-label"></label>
+        <input asp-for="DepartureDate" class="form-control" readonly/>
+        <span asp-validation-for="DepartureDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input asp-for="DepartureDateAD" hidden/>
+        <label asp-for="DepartureTime" class="control-label"></label>
+        <input asp-for="DepartureTime" class="form-control" readonly />
+        <span asp-validation-for="DepartureTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="ثبت" class="btn btn-info" />
+    </div>
+</form>
+

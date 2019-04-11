@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using AbsentSystem.Data.Entities;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace AbsentSystem.Areas.Identity.Pages.Account
 {
@@ -37,21 +34,34 @@ namespace AbsentSystem.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "وارد کردن فیلد ایمیل اجباری است")]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "ایمیل")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "وارد کردن فیلد  نام کاربری اجباری است")]
+            [Display(Name = "نام کاربری")]
+            public string UserName { get; set; }
+
+            [Required(ErrorMessage = "وارد کردن فیلد کدملی اجباری است")]
+            [StringLength(10, ErrorMessage = "طول کدملی وارد شده مجاز نیست حداکثز 10 گاراکتر و حدااقل 10", MinimumLength = 10)]
+            [Display(Name = "کدملی")]
+            public string NationalCode { get; set; }
+
+            [Required(ErrorMessage = "وارد کردن فیلد  شماره تلفن اجباری است")]
+            [Display(Name = "شماره تلفن")]
+            public string PhoneNumber { get; set; }
+
+            [Required(ErrorMessage = "وارد کردن فیلد رمز عبور اجباری است")]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "رمز عبور")]
             public string Password { get; set; }
 
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
+            [Required(ErrorMessage = "وارد کردن  فیلد آدرس اجباری است")]
+            [Display(Name = "آدرس")]
+            public string Address { get; set; }
+
+
         }
 
         public void OnGet(string returnUrl = null)
@@ -61,11 +71,23 @@ namespace AbsentSystem.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? "/";
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = Input.Email, Email = Input.Email };
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                Random rand = new Random(DateTime.Now.Millisecond);
+                User user = new User()
+                {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    Address = Input.Address,
+                    NationalCode = Input.NationalCode,
+                    PhoneNumber = Input.PhoneNumber,
+                    ShowPass = Input.Password,
+                    PersonelId = rand.Next(1, 10000000).ToString(),
+                    DisplayName=Input.UserName
+                };
+
+                IdentityResult result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -80,7 +102,6 @@ namespace AbsentSystem.Areas.Identity.Pages.Account
                     //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                     //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)

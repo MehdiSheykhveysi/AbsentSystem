@@ -6,15 +6,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20190407093052_Intitial.cs" />
+    <Compile Remove="Data\Migrations\20190407134041_Initial.cs" />
+    <Compile Remove="Data\Migrations\20190408141303_Initial.cs" />
+    <Compile Remove="Data\Migrations\20190409074317_Initail2.cs" />
+    <Compile Remove="Data\Migrations\20190409085817_Initail2.cs" />
+    <Compile Remove="Data\Migrations\20190410152710_Initial.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.7" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
-    <Folder Include="Data\Repositories\Contract\" />
-    <Folder Include="Data\Repositories\Implementation\" />
   </ItemGroup>
 
   <ItemGroup>

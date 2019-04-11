@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbsentSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190406074808_Initial")]
-    partial class Initial
+    [Migration("20190410174027_Initail")]
+    partial class Initail
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,13 +35,11 @@ namespace AbsentSystem.Migrations
 
                     b.Property<DateTime?>("EntranceTime");
 
-                    b.Property<int>("UserId");
-
-                    b.Property<string>("UserId1");
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("AttendanceLists");
                 });
@@ -52,9 +50,22 @@ namespace AbsentSystem.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AttendanceListId");
+                    b.Property<int?>("AttendanceListId");
 
-                    b.Property<string>("Title");
+                    b.Property<DateTime>("DepartureDate");
+
+                    b.Property<string>("DepartureTime")
+                        .HasMaxLength(8);
+
+                    b.Property<DateTime>("EntranceDate");
+
+                    b.Property<string>("EntranceTime")
+                        .HasMaxLength(8);
+
+                    b.Property<DateTime>("TimeOff");
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 
@@ -70,8 +81,14 @@ namespace AbsentSystem.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("Address")
+                        .HasMaxLength(150);
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("DisplayName")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -82,6 +99,9 @@ namespace AbsentSystem.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
+                    b.Property<string>("NationalCode")
+                        .HasMaxLength(12);
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
 
@@ -90,13 +110,17 @@ namespace AbsentSystem.Migrations
 
                     b.Property<string>("PasswordHash");
 
-                    b.Property<string>("PersonnelId");
+                    b.Property<string>("PersonelId")
+                        .HasMaxLength(20);
 
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
+
+                    b.Property<string>("ShowPass")
+                        .HasMaxLength(50);
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -182,11 +206,9 @@ namespace AbsentSystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -217,11 +239,9 @@ namespace AbsentSystem.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 
@@ -234,15 +254,14 @@ namespace AbsentSystem.Migrations
                 {
                     b.HasOne("AbsentSystem.Data.Entities.User", "User")
                         .WithMany("AttendanceLists")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("AbsentSystem.Data.Entities.TypeVacation", b =>
                 {
                     b.HasOne("AbsentSystem.Data.Entities.AttendanceList", "AttendanceList")
                         .WithMany("Vacations")
-                        .HasForeignKey("AttendanceListId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AttendanceListId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AbsentSystem.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Site.Core.DataBase.Repositories
+namespace AbsentSystem.Data.Repositories.Contract
 {
     public interface IGenericRepositories<TEntity> where TEntity : class, IEntiity
     {

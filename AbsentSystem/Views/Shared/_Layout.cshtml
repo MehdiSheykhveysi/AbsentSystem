@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="fa">
 <head>
-    <title>Business: Business Multipurpose HTML template</title>
+    <title>سیستم جامع حضور غیاب</title>
     <partial name="MetaTagPartialView" />
     <!-- All CSS Files -->
     <partial name="CssStylePartialView" />
@@ -9,33 +9,7 @@
 <body class="dark-bg">
     <partial name="PreloadTopAndPageHeaderPartialView" />
     <!-- ==== Header Start  ==== -->
-    <header id="pageHeader" class="header navbar">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar icon-bar-last"></span>
-                </button>
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()">ثبت نام</a></li>
-                    <li><a href="#contact">ورود</a></li>
-                </ul>
-            </div>
-            <nav id="myNavbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="#contact">ارتباط با ما</a></li>
-                    <li><a href="#gallery">تصاویر</a></li>
-                    <li><a href="#blog">شبکه اجتماعی</a></li>
-                    <li><a href="#team">تیم</a></li>
-                    <li><a href="#portfolio">فعالیت ها</a></li>
-                    <li><a href="#service">خدمات</a></li>
-                    <li><a href="#about">درباره ی من</a></li>
-                    <li><a href="#home">خانه</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <partial name="MenuPartialView" />
     <!-- ==== Header End ==== -->
     <div id="home" class="main-header bg-opacity">
         <!-- main header -->
@@ -45,8 +19,7 @@
                     <div class="main-header-text">
                         <h1>خوش اومدی</h1>
                         <h3>دنبال چی میگردی؟ <span class="element"></span></h3>
-                        <a href="#" class="active">آشنایی با من</a>
-                        <a href="#">ارتباط با من</a>
+                        <a href="https://www.instagram.com/samiiazarii/" class="active">آشنایی با من</a>
                     </div>
                 </div>
             </div>
@@ -54,7 +27,7 @@
         <!-- /main header -->
     </div>
     <!-- ==== Main Banner service Strat ==== -->
-    <section class="header-service">
+    @*<section class="header-service">
         <div class="container">
             <div class="row">
                 <!-- Service Item -->
@@ -101,7 +74,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>*@
     <!-- ==== Main Banner service End ==== -->
     <section>
         <div class="container">

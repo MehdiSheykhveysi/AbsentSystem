@@ -1,0 +1,35 @@
+﻿@model AbsentSystem.Models.UserViewModel.UserRegidterDepartureDate
+
+@{
+    ViewData["Title"] = " صفحه ثبت ساعت بازگشت";
+    Layout = "~/Areas/Identity/Pages/Shared/_Layout.cshtml";
+}
+<h4>ثبت ساعت بازگشت</h4>
+<hr />
+<form asp-action="RegidterDepartureDate" method="post">
+    <div class="form-group">
+        <input asp-for="Id" hidden />
+        <label asp-for="EntranceTime" class="control-label"></label>
+        <input asp-for="EntranceTime" class="form-control" readonly />
+        <span asp-validation-for="EntranceTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EntranceDate" class="control-label"></label>
+        <input asp-for="EntranceDate" class="form-control" readonly/>
+        <span asp-validation-for="EntranceDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DepartureDate" class="control-label"></label>
+        <input asp-for="DepartureDate" class="form-control" readonly/>
+        <span asp-validation-for="DepartureDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DepartureTime" class="control-label"></label>
+        <input asp-for="DepartureTime" class="form-control" readonly/>
+        <span asp-validation-for="DepartureTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="ثبت" class="btn btn-success" />
+    </div>
+</form>
+

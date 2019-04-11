@@ -1,37 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using AbsentSystem.Models;
+using Microsoft.AspNetCore.Identity;
+using AbsentSystem.Data.Entities;
+using System.Threading.Tasks;
+using AbsentSystem.Models.UserViewModel;
 
 namespace AbsentSystem.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public UserManager<User> _userManager { get; set; }
+        public RoleManager<IdentityRole> _roleManager { get; set; }
+        public HomeController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
+            this._userManager = userManager;
+            this._roleManager = roleManager;
+        }
+        public async Task<IActionResult> Index()
+        {
+            await this.CreateAdmin();
             return View();
         }
 
-        public IActionResult About()
+        public async Task CreateAdmin()
         {
-            ViewData["Message"] = "Your application description page.";
+            UserAdminInfo adminInfo = new UserAdminInfo();
+            if (await _userManager.FindByEmailAsync("a.Admin1234@gmail.com") != null)
+            {
+                IdentityRole role = new IdentityRole
+                {
+                    Name = "Admin"
+                };
+                User user = new User
+                {
+                    Email = "a.Admin1234@gmail.com",
+                    UserName = "a.Admin1234@gmail.com",
+                    DisplayName = "RootAdmin",
+                    Address = "Iran-Tehran",
+                    PhoneNumber = "09991234567",
+                    PersonelId = "123455667",
+                    NationalCode = "1234567891",
+                    ShowPass = "Admin1234",
+                };
+                await _roleManager.CreateAsync(role);
+                var cuser = await _userManager.CreateAsync(user, user.ShowPass);
+                await _userManager.AddToRoleAsync(user, "Admin");
 
-            return View();
-        }
+                adminInfo.Email = user.Email;
+                adminInfo.Password = user.ShowPass;
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

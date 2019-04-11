@@ -1,6 +1,7 @@
-﻿<html lang="zxx">
+﻿<!DOCTYPE html>
+<html lang="zxx">
 <head>
-    <title>Business: Business Multipurpose HTML template</title>
+    <title>سیستم جامع حضور غیاب</title>
     <partial name="MetaTagPartialView" />
     <!-- All CSS Files -->
     <partial name="CssStylePartialView" />
@@ -8,33 +9,7 @@
 <body>
     <partial name="PreloadTopAndPageHeaderPartialView" />
     <!-- ==== Header Start  ==== -->
-    <header id="pageHeader" class="header navbar">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar icon-bar-last"></span>
-                </button>
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()">ثبت نام</a></li>
-                    <li><a href="#contact">ورود</a></li>
-                </ul>
-            </div>
-            <nav id="myNavbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="#contact">ارتباط با ما</a></li>
-                    <li><a href="#gallery">تصاویر</a></li>
-                    <li><a href="#blog">شبکه اجتماعی</a></li>
-                    <li><a href="#team">تیم</a></li>
-                    <li><a href="#portfolio">فعالیت ها</a></li>
-                    <li><a href="#service">خدمات</a></li>
-                    <li><a href="#about">درباره ی من</a></li>
-                    <li><a href="#home">خانه</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <partial name="MenuPartialView" />
     <!-- ==== Header End ==== -->
     <!--== Page Title Section Start ==-->
     <section class="page-title page-bg bg-opacity title-padding">
@@ -42,16 +17,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2>Blog Details</h2>
-
                 </div>
             </div>
         </div>
         <div class="breadcrumb">
             <div class="container">
-                <div class="row">
+                <div class="row ">
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li>Blog Details</li>
+                        <li>@ViewData["Title"]</li>
                     </ul>
                 </div>
             </div>
@@ -59,11 +32,17 @@
     </section>
     <!--== Page Title Section End ==-->
     <!--== Blog Section Start ==-->
-
+    <!--== Blog Right Sidebar==-->
     <section class="blog-details-post section-padding-tb">
         <div class="container">
             <div class="row">
-                @RenderBody()
+                <div class="col-md-9">
+                    <div class="post-content">
+                        <div class="comments-area text-right">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

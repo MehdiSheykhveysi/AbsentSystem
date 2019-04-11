@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AbsentSystem.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Initail : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,7 +41,11 @@ namespace AbsentSystem.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    PersonnelId = table.Column<string>(nullable: true)
+                    DisplayName = table.Column<string>(maxLength: 50, nullable: true),
+                    PersonelId = table.Column<string>(maxLength: 20, nullable: true),
+                    ShowPass = table.Column<string>(maxLength: 50, nullable: true),
+                    Address = table.Column<string>(maxLength: 150, nullable: true),
+                    NationalCode = table.Column<string>(maxLength: 12, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,8 +98,8 @@ namespace AbsentSystem.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -139,8 +143,8 @@ namespace AbsentSystem.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -164,15 +168,14 @@ namespace AbsentSystem.Migrations
                     DepartureTime = table.Column<DateTime>(nullable: true),
                     EntranceDate = table.Column<DateTime>(nullable: true),
                     DepartureDate = table.Column<DateTime>(nullable: true),
-                    UserId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AttendanceLists", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AttendanceLists_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_AttendanceLists_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -184,8 +187,13 @@ namespace AbsentSystem.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(nullable: true),
-                    AttendanceListId = table.Column<int>(nullable: false)
+                    Title = table.Column<string>(maxLength: 100, nullable: true),
+                    TimeOff = table.Column<DateTime>(nullable: false),
+                    DepartureDate = table.Column<DateTime>(nullable: false),
+                    DepartureTime = table.Column<string>(maxLength: 8, nullable: true),
+                    EntranceDate = table.Column<DateTime>(nullable: false),
+                    EntranceTime = table.Column<string>(maxLength: 8, nullable: true),
+                    AttendanceListId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -195,7 +203,7 @@ namespace AbsentSystem.Migrations
                         column: x => x.AttendanceListId,
                         principalTable: "AttendanceLists",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -238,9 +246,9 @@ namespace AbsentSystem.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AttendanceLists_UserId1",
+                name: "IX_AttendanceLists_UserId",
                 table: "AttendanceLists",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TypeVacations_AttendanceListId",

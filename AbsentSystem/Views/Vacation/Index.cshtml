@@ -1,0 +1,78 @@
+﻿@model IEnumerable<AbsentSystem.Models.VacationViewModel.VacationIndexVm>
+
+@{
+    ViewData["Title"] = "لیست مرخصی های " + @ViewData["CurrentDate"];
+    Layout = "~/Areas/Identity/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>لیست مرخصی ها</h2>
+<!-- /.panel-heading -->
+<div class="panel-body">
+    <div class="table-responsive">
+        <div class="form-inline" role="grid">
+            <table class="table table-striped table-bordered table-hover text-center" id="dataTables-example" aria-describedby="dataTables-example_info">
+                <thead>
+                    <tr>
+                        <th>زمان بازگشت</th>
+                        <th>تاریخ بازگشت </th>
+                        <th>زمان خروج</th>
+                        <th>تاریخ خروج</th>
+                        <th> مدت زمان</th>
+                        <th>عنوان مرخصی </th>
+                        <th>ردیف </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.EntranceTime
+                            </td>
+                            <td>
+                                @if (@item.EntranceDate.ToPersionDate() == "هنوز مشخص نشد")
+                                {
+                                <a asp-controller="vacation" asp-action="ReturnFromVacation" asp-route-Id="@item.Id"> @item.EntranceDate.ToPersionDate()</a>
+                                }
+                                else
+                                {
+                                    @item.EntranceDate.ToPersionDate()
+                                }
+                            </td>
+                            <td>
+                                @item.DepartureTime
+                            </td>
+
+                            <td>
+                                @if (@item.DepartureDate.ToPersionDate() == "هنوز مشخص نشد")
+                                {
+                                    <a asp-controller="vacation" asp-action="ReturnFromVacation" asp-route-Id="@item.Id" class="btn btn-link">@item.DepartureDate.ToPersionDate()</a>
+                                }
+                                else
+                                {
+                                    @item.DepartureDate.ToPersionDate()
+                                }
+                            </td>
+                            <td>
+                                @item.TimeOff.ToString("HH:mm")
+                            </td>
+                            <td>
+                                @item.Title
+                            </td>
+                            <td></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('table tr td:last-child').each(function (i) {
+                $(this).text(i + 1);
+            });
+        });
+    </script>
+}
