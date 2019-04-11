@@ -9,6 +9,7 @@
 <form asp-action="RegidterDepartureDate" method="post">
     <div class="form-group">
         <input asp-for="Id" hidden />
+        <input asp-for="UserId" hidden />
         <label asp-for="EntranceTime" class="control-label"></label>
         <input asp-for="EntranceTime" class="form-control" readonly />
         <span asp-validation-for="EntranceTime" class="text-danger"></span>

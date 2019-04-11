@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,9 +27,14 @@ namespace AbsentSystem.Controllers
 
         public async Task<IActionResult> Index(CancellationToken cancellationToken, string Id = null)
         {
+            List<VacationIndexVm> model = new List<VacationIndexVm>();
             List<TypeVacation> vacations = await _vacationRepository.Entities.Where(v => string.IsNullOrEmpty(Id) || v.AttendanceListId.ToString().Equals(Id)).ToListAsync(cancellationToken);
-            ViewData["CurrentDate"] = string.IsNullOrEmpty(Id) ? "کل روز ها" : vacations.First().DepartureDate.ToPersionDate();
-            List<VacationIndexVm> model = _mapper.Map<List<VacationIndexVm>>(vacations);
+            if (vacations.Any())
+            {
+                ViewData["CurrentDate"] = (string.IsNullOrEmpty(Id) ? "کل روز ها" : vacations.First()?.DepartureDate.ToPersionDate());
+                model = _mapper.Map<List<VacationIndexVm>>(vacations);
+                return View(model);
+            }
             return View(model);
         }
 
@@ -58,7 +64,7 @@ namespace AbsentSystem.Controllers
             vacation.EntranceDate = DateTime.Now;
             vacation.EntranceTime = DateTime.Now.ToString("HH:mm");
             await _vacationRepository.UpdateAsync(vacation, cancellationToken);
-            return Redirect("/User/Index");
+            return Redirect("/User/Index?Id=" + User.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
     }
 }

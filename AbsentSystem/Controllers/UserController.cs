@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using AbsentSystem.Data.Entities;
@@ -27,7 +28,7 @@ namespace AbsentSystem.Controllers
             this._attendanceListRepository = AttendanceListRepository;
         }
 
-        public async Task<IActionResult> Index(string Id,CancellationToken cancellationToken)
+        public async Task<IActionResult> Index(string Id, CancellationToken cancellationToken)
         {
             User user = await _userManager.Users.Where(u => u.Id.Equals(Id)).Include(u => u.AttendanceLists).AsNoTracking().FirstOrDefaultAsync(cancellationToken);
             UserIndexVm model = new UserIndexVm
@@ -100,7 +101,7 @@ namespace AbsentSystem.Controllers
         }
             };
             await _attendanceListRepository.UpdateAsync(enterance, cancellationToken);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { Id = User.FindFirst(ClaimTypes.NameIdentifier).Value });
         }
 
         [HttpPost]
@@ -129,6 +130,7 @@ namespace AbsentSystem.Controllers
             UserRegidterDepartureDate model = new UserRegidterDepartureDate
             {
                 Id = attandance.Id,
+                UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
                 EntranceDate = attandance.EntranceDate.Value.ToPersionDate(),
                 EntranceTime = attandance.EntranceTime.Value.ToString("HH:mm"),
                 DepartureDate = DateTime.Now.ToPersionDate(),
@@ -144,7 +146,7 @@ namespace AbsentSystem.Controllers
             attandance.DepartureDate = DateTime.Now;
             attandance.DepartureTime = new DateTime(1, 1, 1, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             await _attendanceListRepository.UpdateAsync(attandance, cancellationToken);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { Id = model.UserId });
         }
     }
 }

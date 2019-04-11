@@ -32,7 +32,7 @@
                             <td>
                                 @if (@item.EntranceDate.ToPersionDate() == "هنوز مشخص نشد")
                                 {
-                                <a asp-controller="vacation" asp-action="ReturnFromVacation" asp-route-Id="@item.Id"> @item.EntranceDate.ToPersionDate()</a>
+                                <a asp-controller="vacation" asp-action="ReturnFromVacation" asp-route-Id="@item.Id" class="btn btn-link"> @item.EntranceDate.ToPersionDate()</a>
                                 }
                                 else
                                 {

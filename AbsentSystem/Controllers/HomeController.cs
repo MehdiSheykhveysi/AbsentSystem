@@ -26,7 +26,7 @@ namespace AbsentSystem.Controllers
         public async Task CreateAdmin()
         {
             UserAdminInfo adminInfo = new UserAdminInfo();
-            if (await _userManager.FindByEmailAsync("a.Admin1234@gmail.com") != null)
+            if (await _userManager.FindByEmailAsync("a.Admin1234@gmail.com") == null)
             {
                 IdentityRole role = new IdentityRole
                 {
