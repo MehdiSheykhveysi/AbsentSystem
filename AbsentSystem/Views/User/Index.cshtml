@@ -25,41 +25,44 @@
                 <tbody>
                     @foreach (var item in Model.AttendaceLists)
                     {
-                    <tr>
-                        <td>
-                            <a class="btn btn-link" asp-controller="Vacation" asp-action="Index" asp-route-Id="@item.Id">لیست مرخصی های این روز</a>
-                        </td>
-                        @if (item.EntranceDate.Day == DateTime.Now.Day && item.EntranceTime.Hour != 0)
-                        {
+                        <tr>
                             <td>
-                                <a class="btn btn-link" asp-controller="User" asp-action="Vacation" asp-route-Id="@item.Id">رد کردن مرخصی</a>
+                                <a class="btn btn-link" asp-controller="Vacation" asp-action="Index" asp-route-Id="@item.Id">لیست مرخصی های این روز</a>
                             </td>
-                        }
-                        <td>
-                            @item.DepartureTime.ToString("HH: mm")
-                        </td>
-                        <td>
-                            @if (@item.DepartureDate.ToPersionDate() == "هنوز مشخص نشد")
+                            @if (item.EntranceDate.Day == DateTime.Now.Day && item.EntranceTime.Hour != 0)
                             {
-                                <a asp-controller="User" asp-action="SetRegidterDepartureDate" asp-route-Id="@item.Id" class="btn btn-link">@item.DepartureDate.ToPersionDate()</a>
+                                <td>
+                                    <a class="btn btn-link" asp-controller="User" asp-action="Vacation" asp-route-Id="@item.Id">رد کردن مرخصی</a>
+                                </td>
                             }
                             else
                             {
-                                @item.DepartureDate.ToPersionDate()
+                                <td>
+                                    @item.DepartureTime.ToString("HH: mm")
+                                </td>
                             }
-                        </td>
+                            <td>
+                                @if (@item.DepartureDate.ToPersionDate() == "هنوز مشخص نشد")
+                                {
+                                    <a asp-controller="User" asp-action="SetRegidterDepartureDate" asp-route-Id="@item.Id" class="btn btn-link">@item.DepartureDate.ToPersionDate()</a>
+                                }
+                                else
+                                {
+                                    @item.DepartureDate.ToPersionDate()
+                                }
+                            </td>
 
-                        <td>
-                            @item.EntranceTime.ToString("HH: mm")
-                        </td>
-                        <td>
-                            @item.EntranceDate.ToPersionDate()
-                        </td>
-                        <td>
-                            @item.EntranceDate.ToPersionDayOfWeekName()
-                        </td>
-                        <td></td>
-                    </tr>
+                            <td>
+                                @item.EntranceTime.ToString("HH: mm")
+                            </td>
+                            <td>
+                                @item.EntranceDate.ToPersionDate()
+                            </td>
+                            <td>
+                                @item.EntranceDate.ToPersionDayOfWeekName()
+                            </td>
+                            <td></td>
+                        </tr>
                     }
                 </tbody>
             </table>
