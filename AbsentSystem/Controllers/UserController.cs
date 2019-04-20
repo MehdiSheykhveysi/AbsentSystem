@@ -144,7 +144,7 @@ namespace AbsentSystem.Controllers
             if (model.Id == 0) return NotFound();
             AttendanceList attandance = await _attendanceListRepository.Entities.FirstOrDefaultAsync(c => c.Id == model.Id, cancellationToken);
             attandance.DepartureDate = DateTime.Now;
-            attandance.DepartureTime = new DateTime(1, 1, 1, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            attandance.DepartureTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             await _attendanceListRepository.UpdateAsync(attandance, cancellationToken);
             return RedirectToAction(nameof(Index), new { Id = model.UserId });
         }
